@@ -18,6 +18,7 @@
         <junit-platform.version>5.7.2</junit-platform.version>
 
         <sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
+        <sonar.coverage.jacoco.xmlReportPaths>target/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <maven.failsafe.skipTests>false</maven.failsafe.skipTests>
         <maven.surefire.skipTests>false</maven.surefire.skipTests>
         <maven.surefire.failIfNoTests>false</maven.surefire.failIfNoTests>
@@ -57,6 +58,12 @@
                             <destFile>${sonar.jacoco.reportPath}</destFile>
                             <append>true</append>
                         </configuration>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
