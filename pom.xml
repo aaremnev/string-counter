@@ -17,7 +17,7 @@
 
         <junit-platform.version>5.7.2</junit-platform.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <jacoco.version>0.8.1</jacoco.version>
+        <jacoco.version>0.8.4</jacoco.version>
 
         <sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
         <maven.failsafe.skipTests>false</maven.failsafe.skipTests>
