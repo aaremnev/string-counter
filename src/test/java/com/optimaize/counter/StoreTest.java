@@ -1,51 +1,52 @@
 package com.optimaize.counter;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static junit.framework.TestCase.assertEquals;
 
-class StoreTest {
+
+public class StoreTest {
 
     private Store store;
 
-    @BeforeEach
-    void init() {
+    @Before
+    public void init() {
         store = new Store();
     }
 
     @Test
-    void testEmptyStats() {
+    public void testEmptyStats() {
         assertEquals(0, store.counters().size());
-        assertEquals(0, store.averageLength());
+        assertEquals(0.0, store.averageLength());
     }
 
     @Test
-    void testReset() {
+    public void testReset() {
         store.put("111");
         store.reset();
 
         assertEquals(0, store.counters().size());
-        assertEquals(0, store.averageLength());
+        assertEquals(0.0, store.averageLength());
     }
 
     @Test
-    void testCounterValues(){
+    public void testCounterValues(){
         store.put("111");
         store.put("222");
 
         List<Map.Entry<String, Integer>> stats = store.counters();
 
         assertEquals(2, stats.size());
-        assertEquals(1, stats.get(0).getValue());
-        assertEquals(1, stats.get(1).getValue());
+        assertEquals(1, stats.get(0).getValue().intValue());
+        assertEquals(1, stats.get(1).getValue().intValue());
     }
 
     @Test
-    void testCounterOrder() {
+    public void testCounterOrder() {
         store.put("111");
         store.put("222");
         store.put("222");
@@ -53,14 +54,14 @@ class StoreTest {
         List<Map.Entry<String, Integer>> stats = store.counters();
 
         assertEquals(2, stats.size());
-        assertEquals(2, stats.get(0).getValue());
+        assertEquals(2, stats.get(0).getValue().intValue());
         assertEquals("222", stats.get(0).getKey());
-        assertEquals(1, stats.get(1).getValue());
+        assertEquals(1, stats.get(1).getValue().intValue());
         assertEquals("111", stats.get(1).getKey());
     }
 
     @Test
-    void testAverageLength() {
+    public void testAverageLength() {
         store.put("111");
         store.put("22");
 
