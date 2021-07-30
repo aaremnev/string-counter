@@ -8,7 +8,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class StoreTest {
+public class StoreTest {
 
     private Store store;
 
