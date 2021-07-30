@@ -8,23 +8,23 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class StoreTest {
+class StoreTest {
 
     private Store store;
 
     @BeforeEach
-    public void init() {
+    void init() {
         store = new Store();
     }
 
     @Test
-    public void testEmptyStats() {
+    void testEmptyStats() {
         assertEquals(0, store.counters().size());
         assertEquals(0, store.averageLength());
     }
 
     @Test
-    public void testReset() {
+    void testReset() {
         store.put("111");
         store.reset();
 
@@ -33,7 +33,7 @@ public class StoreTest {
     }
 
     @Test
-    public void testCounterValues(){
+    void testCounterValues(){
         store.put("111");
         store.put("222");
 
@@ -45,7 +45,7 @@ public class StoreTest {
     }
 
     @Test
-    public void testCounterOrder() {
+    void testCounterOrder() {
         store.put("111");
         store.put("222");
         store.put("222");
@@ -60,7 +60,7 @@ public class StoreTest {
     }
 
     @Test
-    public void testAverageLength() {
+    void testAverageLength() {
         store.put("111");
         store.put("22");
 

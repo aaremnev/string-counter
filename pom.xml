@@ -16,14 +16,14 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <junit-platform.version>5.7.2</junit-platform.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <jacoco.version>0.8.1</jacoco.version>
 
         <sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
-        <sonar.coverage.jacoco.xmlReportPaths>target/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <maven.failsafe.skipTests>false</maven.failsafe.skipTests>
         <maven.surefire.skipTests>false</maven.surefire.skipTests>
         <maven.surefire.failIfNoTests>false</maven.surefire.failIfNoTests>
         <maven.failsafe.failIfNoTests>false</maven.failsafe.failIfNoTests>
-
     </properties>
 
     <build>
@@ -32,8 +32,10 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.4</version>
+                <version>${jacoco.version}</version>
                 <executions>
+
+                    <!-- Instrument code when running unit tests -->
                     <execution>
                         <id>default-prepare-agent</id>
                         <goals>
@@ -42,10 +44,12 @@
                         <configuration>
                             <skip>${maven.surefire.skipTests}</skip>
                             <propertyName>maven.surefire.argLine</propertyName>
-                            <!-- using the same dest file for both UT and IT -->
+                            <!-- using the same dest file for both UT and IT to calculate overall coverage -->
                             <destFile>${sonar.jacoco.reportPath}</destFile>
                         </configuration>
                     </execution>
+
+                    <!-- Instrument code when running integration tests -->
                     <execution>
                         <id>default-prepare-agent-integration</id>
                         <goals>
@@ -59,6 +63,8 @@
                             <append>true</append>
                         </configuration>
                     </execution>
+
+                    <!-- Generate XML test coverage report -->
                     <execution>
                         <id>report</id>
                         <goals>
@@ -70,7 +76,7 @@
 
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <skipTests>${maven.surefire.skipTests}</skipTests>
                     <failIfNoTests>${maven.surefire.failIfNoTests}</failIfNoTests>
@@ -81,7 +87,7 @@
 
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <skipTests>${maven.failsafe.skipTests}</skipTests>
                     <failIfNoTests>${maven.failsafe.failIfNoTests}</failIfNoTests>
@@ -107,6 +113,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 
 </project>
